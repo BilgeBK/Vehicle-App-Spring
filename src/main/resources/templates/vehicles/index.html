@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vehicle App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+           body {
+background:url(https://c4.wallpaperflare.com/wallpaper/255/287/619/black-bmw-blue-hd-wallpaper-preview.jpg);
+font-family:'PT Sans',Helvetica, Arial, sans-serif;
+color:#fff;
+   background-repeat: no-repeat;
+   background-size:cover;
+    background-height : 50%;
+        background-attachment: fixed;
+        background-position : center center;
+}
+
+.navbar {
+  width: 100%;
+  background-color: black;
+  overflow: auto;
+}
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+
+
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="container">
+
+    <h1 style="text-align:center;font-weight:bold;font-style:italic;margin-top:30px;" >All Vehicles</h1>
+    <div class="navbar">
+        <a href="/"><i class="fa fa-fw fa-home"></i> Home Page</a>
+        <a href="addVehicle"><i class="fa fa-plus-circle"></i> Add Vehicle</a>
+        <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+    </div>
+    <form  th:action="@{/vehicles}" method="post">
+    <div>
+        <br/>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <form class="card card-sm">
+                    <div class="card-body row no-gutters align-items-center">
+
+                        <!--end of col-->
+                        <div class="col">
+                            <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords" name="searchVehicle">
+                        </div>
+                        <!--end of col-->
+                        <div class="col-auto">
+                            <button style="background-color:#008CBA;height:34px;" type="submit"><i class="fas fa-search h4"style="width:60px;" ></i></button>
+                        </div>
+                        <!--end of col-->
+                    </div>
+                </form>
+            </div>
+            <!--end of col-->
+        </div>
+
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>License Plate</th>
+            <th>Color</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Information</th>
+            <th>Count Passes</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="vehicle : ${vehicles}">
+            <td th:text="${vehicle.licensePlate}">License Plate</td>
+            <td th:text="${vehicle.color}">Color</td>
+            <td th:text="${vehicle.brand}">Brand</td>
+            <td th:text="${vehicle.model}">Model</td>
+             <td th:text="${vehicle.information}">Information</td>
+             <td th:text="${vehicle.countPasses}">Count Passes</td>
+             <td><a th:href="@{/vehicle/{id}(id=${vehicle.vehicleId})}">View</a></td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+</div>
+
+</body>
+</html>
