@@ -77,8 +77,13 @@ public class VehicleServiceImpl implements VehicleService{
 
     @Override
     public Vehicle viewVehicle(String vehicleId) {
-        var findVehicle = vehicleRepository.findById(vehicleId);
-        return findVehicle.get();
+        Vehicle findVehicle = null;
+        try{
+             findVehicle = vehicleRepository.findById(vehicleId).get();
+        }catch(Exception e){
+            System.out.println("Error" + e.getMessage());
+        }
+        return findVehicle;
     }
 
     @Override
